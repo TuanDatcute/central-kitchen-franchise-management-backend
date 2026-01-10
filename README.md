@@ -1,123 +1,124 @@
-# Hệ thống Quản lý Bếp Trung Tâm và Cửa hàng Franchise
-
-## Central Kitchen and Franchise Store Management System – BackendBackend
-
----
-
-## Thông tin đề tài
-
--   **Mã đề tài:** SP26SWP07
--   **Tên đề tài:**  
-    Hệ thống Quản lý Bếp Trung Tâm và Cửa hàng Franchise  
-    (Central Kitchen and Franchise Store Management System)
--   **Nhóm thực hiện:**
--   **Repository:** Frontend
+# Hệ thống Quản lý Bếp Trung Tâm và Cửa hàng Franchise  
+## Central Kitchen and Franchise Store Management System – Backend
 
 ---
 
-## Mô tả tổng quan
-
-Trong mô hình kinh doanh chuỗi (franchise), **bếp trung tâm** đóng vai trò sản xuất, sơ chế và cung ứng nguyên liệu hoặc thành phẩm cho nhiều cửa hàng nhượng quyền.
-
-Việc quản lý **đơn hàng nội bộ, tồn kho, sản xuất, phân phối và kiểm soát chất lượng** giữa bếp trung tâm và các cửa hàng đòi hỏi một **hệ thống phần mềm tập trung**, hoạt động **chính xác và theo thời gian thực** nhằm:
-
--   Đảm bảo đồng bộ vận hành
--   Giảm lãng phí
--   Duy trì chất lượng sản phẩm
--   Nâng cao hiệu quả quản lý toàn chuỗi franchise
+##  Thông tin đề tài
+- **Mã đề tài:** SP26SWP07  
+- **Tên đề tài:**  
+  Hệ thống Quản lý Bếp Trung Tâm và Cửa hàng Franchise  
+  (Central Kitchen and Franchise Store Management System)
+- **Nhóm thực hiện:**   
+- **Repository:** Backend
 
 ---
 
-## Vấn đề thực tế
+##  Mô tả tổng quan
+Backend của hệ thống chịu trách nhiệm xử lý **nghiệp vụ cốt lõi**, **luồng dữ liệu**, **phân quyền**, và **kết nối cơ sở dữ liệu** giữa bếp trung tâm và các cửa hàng franchise.
 
-Trong thực tế, nhiều chuỗi franchise hiện nay vẫn quản lý bếp trung tâm và cửa hàng bằng các **công cụ rời rạc** như Excel, giấy tờ hoặc phần mềm đơn lẻ, dẫn đến nhiều hạn chế:
-
--   Thiếu đồng bộ thông tin tồn kho, đơn đặt hàng và kế hoạch sản xuất
--   Dự báo nhu cầu kém chính xác, gây thiếu hoặc dư nguyên liệu
--   Khó kiểm soát chất lượng, hạn sử dụng và truy xuất nguồn gốc
--   Quy trình giao nhận giữa bếp trung tâm và cửa hàng thiếu minh bạch
--   Nhà quản lý khó theo dõi hiệu quả vận hành toàn hệ thống
-
-Những vấn đề này ảnh hưởng trực tiếp đến **chi phí**, **chất lượng dịch vụ** và **khả năng mở rộng hệ thống franchise**.
+Hệ thống backend đóng vai trò:
+- Trung tâm xử lý logic nghiệp vụ
+- Đảm bảo tính nhất quán dữ liệu
+- Cung cấp API cho Frontend
+- Kiểm soát bảo mật và phân quyền người dùng
 
 ---
 
-## Mục tiêu hệ thống
-
--   Xây dựng hệ thống quản lý tập trung cho bếp trung tâm và cửa hàng franchise
--   Hỗ trợ vận hành theo thời gian thực
--   Tăng tính minh bạch trong sản xuất, phân phối và tồn kho
--   Cung cấp giao diện quản lý trực quan, dễ sử dụng
--   Hỗ trợ báo cáo và ra quyết định cho nhà quản lý
-
----
-
-## Đối tượng sử dụng (Actors)
-
--   **Franchise Store Staff** – Nhân viên cửa hàng
--   **Central Kitchen Staff** – Nhân viên bếp trung tâm
--   **Supply Coordinator** – Điều phối cung ứng
--   **Manager** – Quản lý vận hành
--   **Admin** – Quản trị hệ thống
+##  Mục tiêu Backend
+- Xây dựng hệ thống xử lý nghiệp vụ tập trung
+- Đảm bảo dữ liệu chính xác, đồng bộ theo thời gian thực
+- Hỗ trợ nhiều vai trò người dùng với phân quyền rõ ràng
+- Cung cấp API ổn định, dễ mở rộng
+- Hỗ trợ báo cáo và phân tích dữ liệu vận hành
 
 ---
 
-## Chức năng theo vai trò
-
-### Franchise Store Staff (Nhân viên cửa hàng)
-
--   Tạo đơn đặt hàng nguyên liệu / bán thành phẩm từ bếp trung tâm
--   Theo dõi trạng thái xử lý và giao hàng
--   Xác nhận đã nhận hàng và phản hồi chất lượng
--   Xem tồn kho hiện tại tại cửa hàng
+##  Đối tượng sử dụng (Actors)
+- Franchise Store Staff
+- Central Kitchen Staff
+- Supply Coordinator
+- Manager
+- Admin
 
 ---
 
-### Central Kitchen Staff (Nhân viên bếp trung tâm)
+##  Chức năng nghiệp vụ chính
 
--   Tiếp nhận và xử lý đơn đặt hàng từ các cửa hàng franchise
--   Lập kế hoạch sản xuất theo nhu cầu tổng hợp
--   Cập nhật trạng thái sản xuất và xuất kho
--   Quản lý nguyên liệu đầu vào, hạn sử dụng và lô sản xuất
-
----
-
-### Supply Coordinator (Điều phối cung ứng)
-
--   Tổng hợp và phân loại đơn đặt hàng
--   Điều phối sản xuất và phân phối hàng hóa
--   Lập lịch giao hàng và theo dõi tiến độ vận chuyển
--   Xử lý các vấn đề phát sinh (thiếu hàng, giao trễ, hủy đơn)
+###  Quản lý người dùng & phân quyền
+- Đăng nhập, xác thực và phân quyền theo vai trò
+- Quản lý tài khoản người dùng
+- Kiểm soát truy cập theo chức năng
 
 ---
 
-### Manager (Quản lý vận hành)
-
--   Quản lý danh mục sản phẩm, công thức và định mức nguyên liệu
--   Quản lý tồn kho bếp trung tâm và cửa hàng
--   Theo dõi hiệu suất sản xuất, phân phối và bán hàng
--   Thống kê và báo cáo chi phí, hao hụt và hiệu quả vận hành
-
----
-
-### Admin (Quản trị hệ thống)
-
--   Quản lý người dùng và phân quyền theo vai trò
--   Cấu hình hệ thống (đơn vị tính, quy trình, tham số vận hành)
--   Quản lý danh mục cửa hàng franchise và bếp trung tâm
--   Xem báo cáo tổng hợp toàn hệ thống
+###  Quản lý đơn đặt hàng nội bộ
+- Tạo và xử lý đơn đặt hàng từ cửa hàng franchise
+- Theo dõi trạng thái đơn hàng
+- Hỗ trợ hủy, điều chỉnh và phản hồi đơn hàng
+- Lưu lịch sử giao dịch và trạng thái
 
 ---
 
-## Phạm vi Frontend
-
--   Giao diện đăng nhập và phân quyền
--   Dashboard tổng quan
--   Quản lý đơn đặt hàng
--   Quản lý tồn kho
--   Theo dõi trạng thái sản xuất và giao hàng
--   Giao diện báo cáo, thống kê
--   Thiết kế responsive, thân thiện người dùng
+###  Quản lý sản xuất (Bếp trung tâm)
+- Tổng hợp nhu cầu từ các cửa hàng
+- Lập kế hoạch sản xuất
+- Quản lý lô sản xuất, hạn sử dụng
+- Cập nhật trạng thái sản xuất
 
 ---
 
+###  Quản lý tồn kho
+- Quản lý tồn kho bếp trung tâm và cửa hàng
+- Theo dõi nhập – xuất – tồn
+- Cảnh báo tồn kho thấp hoặc quá hạn
+- Hỗ trợ truy xuất nguồn gốc nguyên liệu
+
+---
+
+###  Điều phối và phân phối
+- Lập lịch giao hàng
+- Theo dõi tiến độ vận chuyển
+- Ghi nhận giao nhận hàng hóa
+- Xử lý sự cố trong quá trình phân phối
+
+---
+
+###  Báo cáo & thống kê
+- Báo cáo sản xuất, tồn kho, phân phối
+- Thống kê chi phí, hao hụt
+- Phân tích hiệu quả vận hành
+- Cung cấp dữ liệu cho dashboard frontend
+
+---
+
+##  Công nghệ sử dụng
+- **Ngôn ngữ:** Java
+- **Framework:** Spring Boot
+- **Database:**  SQL Server
+- **ORM:** JPA / Hibernate
+- **Authentication:** JWT / Session-based
+- **API:** RESTful API
+- **Build Tool:** Maven / Gradle / npm
+
+---
+
+## 🗄️ Thiết kế hệ thống
+- Kiến trúc: Layered Architecture / MVC
+- Phân tách rõ:
+  - Controller
+  - Service
+  - Repository / DAO
+  - Entity / Model
+- Hỗ trợ mở rộng và bảo trì lâu dài
+
+---
+
+## 📁 Cấu trúc thư mục
+src/
+├── controller/ # Xử lý request từ frontend
+├── service/ # Logic nghiệp vụ
+├── repository/ # Truy cập cơ sở dữ liệu
+├── entity/ # Định nghĩa bảng dữ liệu
+├── dto/ # Data Transfer Object
+├── config/ # Cấu hình hệ thống
+└── Application.java
