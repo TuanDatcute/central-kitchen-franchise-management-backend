@@ -1,0 +1,21 @@
+# 1. Chặn các thư mục rác của công cụ lập trình (IntelliJ / VS Code)
+.idea/
+.vscode/
+*.iml
+
+# 2. Chặn thư mục lịch sử của Git (Cực kỳ nặng!)
+.git/
+.gitignore
+
+# 3. Chặn thư mục biên dịch cũ ở máy local (Bắt Docker phải tự build mới hoàn toàn)
+target/
+build/
+
+# 4. Chặn các file Logs cũ dưới máy bạn
+*.log
+logs/
+app-logs-folder/
+
+# 5. Chặn các file chứa mật khẩu bí mật ở máy local của bạn
+.env
+*.local

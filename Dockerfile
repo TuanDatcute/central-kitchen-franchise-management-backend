@@ -13,7 +13,7 @@ RUN mvn clean package -DskipTests
 
 # Giai đoạn 2: Chạy ứng dụng
 # Sử dụng JRE 25 để tối ưu dung lượng (nhẹ và nhanh hơn bản JDK full)
-FROM eclipse-temurin:25-jdk
+FROM eclipse-temurin:25-jre-alpine
 WORKDIR /app
 
 # Copy file jar đã build từ giai đoạn 1
