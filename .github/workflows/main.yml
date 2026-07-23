@@ -12,7 +12,7 @@ jobs:
   build-and-push:
     name: CI - Build & Push Docker Image
     runs-on: ubuntu-latest
-    environment: production # <--- THÊM DÒNG NÀY (Thay 'production' bằng tên Environment bạn tạo trên GitHub)
+    environment: CenFra MS / production # <--- THÊM DÒNG NÀY (Thay 'production' bằng tên Environment bạn tạo trên GitHub)
 
     steps:
       # 1. Lấy code từ repository về runner
