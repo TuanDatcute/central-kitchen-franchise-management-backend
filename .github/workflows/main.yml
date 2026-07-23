@@ -60,7 +60,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             # 1. Di chuyển tới thư mục chứa dự án trên EC2
-            cd /home/ubuntu/app
+            cd /home/ec2-user/app
             
             # 2. Pull image mới nhất vừa build ở bước CI về EC2
             docker compose pull
