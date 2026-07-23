@@ -12,6 +12,7 @@ jobs:
   build-and-push:
     name: CI - Build & Push Docker Image
     runs-on: ubuntu-latest
+    environment: production # <--- THÊM DÒNG NÀY (Thay 'production' bằng tên Environment bạn tạo trên GitHub)
 
     steps:
       # 1. Lấy code từ repository về runner
@@ -30,12 +31,11 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       # 4. Build Docker image và Push lên Docker Hub
-      # Gắn cả tag 'latest' và tag theo SHA commit để dễ kiểm soát phiên bản
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile # Trỏ đúng đường dẫn Dockerfile của ông nếu nằm ở thư mục khác
+          file: ./Dockerfile # Trỏ đúng đường dẫn Dockerfile của bạn
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/cenfra-ms:latest
@@ -46,8 +46,9 @@ jobs:
   # ==========================================
   deploy-to-ec2:
     name: CD - Deploy to EC2
-    needs: build-and-push # Chỉ chạy sau khi Job CI ở trên hoàn thành công
+    needs: build-and-push # Chỉ chạy sau khi Job CI hoàn thành
     runs-on: ubuntu-latest
+    environment: production # <--- CẢ JOB NÀY CŨNG CẦN THÊM (Vì dùng EC2_HOST, EC2_USERNAME, EC2_SSH_KEY)
 
     steps:
       # SSH vào EC2 để thực hiện pull image mới và restart container
