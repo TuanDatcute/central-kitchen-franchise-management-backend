@@ -1,0 +1,35 @@
+services:
+  cenfra-app:
+    image: tuandatnd/cenfra-ms:v2
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - PORT=8080
+    networks:
+      - cenfra-network
+    depends_on:
+      - db-prod
+      
+  db-prod:
+    image : tuandantnd/postgres:v1
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=cenfra_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - cenfra-network
+
+volumes:
+  db_data:
+
+networks:
+  cenfra-network:
+    driver: bridge
+    
+     

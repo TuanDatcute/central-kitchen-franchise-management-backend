@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Business Rules – Export Note & Delivery</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      font-size: 12px;
+      background: #f0f0f0;
+      padding: 24px;
+    }
+
+    h2 {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #1f4e79;
+      font-family: Calibri, Arial, sans-serif;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+
+    thead tr th {
+      background-color: #bdd7ee;
+      border: 1px solid #8eaacc;
+      padding: 6px 10px;
+      text-align: center;
+      font-weight: bold;
+      color: #1f3864;
+      font-size: 12px;
+    }
+
+    td {
+      border: 1px solid #b8cce4;
+      padding: 5px 10px;
+      vertical-align: middle;
+      font-size: 12px;
+      color: #212121;
+    }
+
+    /* Column: Module */
+    td.module {
+      text-align: center;
+      font-weight: bold;
+      color: #1f4e79;
+      background-color: #f2f7fc;
+      width: 200px;
+    }
+
+    /* Column: ID */
+    td.id {
+      text-align: center;
+      width: 130px;
+      font-weight: bold;
+    }
+
+    /* Column: Detail Rule */
+    td.rule {
+      width: auto;
+    }
+
+    /* Highlight rows with bold keywords */
+    td.rule b {
+      font-weight: bold;
+    }
+
+    /* Alternating row color per section */
+    tr.exp-row td { background-color: #ffffff; }
+    tr.exp-row:nth-child(even) td { background-color: #f5faff; }
+
+    tr.del-row td { background-color: #ffffff; }
+    tr.del-row:nth-child(even) td { background-color: #fffde7; }
+
+    /* Highlight special IDs */
+    td.id.hidden-br {
+      background-color: #9b59b6;
+      color: #ffffff;
+      border-radius: 0;
+    }
+
+    td.id.exp {
+      background-color: #2e86c1;
+      color: #ffffff;
+    }
+
+    td.id.del {
+      background-color: #e67e22;
+      color: #ffffff;
+    }
+
+    /* Section separator */
+    tr.section-gap td {
+      background-color: #d9e1f2;
+      height: 4px;
+      padding: 0;
+      border: 1px solid #8eaacc;
+    }
+
+    /* Print button */
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 5px 14px;
+      cursor: pointer;
+      border: 1px solid #2e86c1;
+      background: #2e86c1;
+      color: white;
+      border-radius: 3px;
+    }
+
+    button:hover { background: #1a5276; }
+
+    @media print {
+      body { background: white; padding: 4px; }
+      .toolbar { display: none; }
+      table { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>📋 Business Rules – Export Note &amp; Delivery Management</h2>
+  <button onclick="window.print()">🖨 Print / Export PDF</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:200px">Module</th>
+      <th style="width:130px">ID</th>
+      <th>Detail Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- ========== EXPORT NOTE ========== -->
+    <tr class="exp-row">
+      <td class="module" rowspan="9">Export Note Management<br/>(EXP)</td>
+      <td class="id hidden-br">Hidden system logic</td>
+      <td class="rule">When a store order has status <b>CONSOLIDATED</b> and all required products have sufficient available stock, the order is eligible for export.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-001</td>
+      <td class="rule">The system automatically applies <b>FEFO (First Expired, First Out)</b> when selecting batches for export — batches with the earliest expiry date are consumed first.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-002</td>
+      <td class="rule">Before creating an export note, the system verifies that the total available quantity across all <b>AVAILABLE</b> batches is sufficient to fulfill every product in the order. If any product is short, the order is excluded from the "ready" list.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-003</td>
+      <td class="rule">If stock becomes insufficient during the actual export creation, the system throws an <b>InventoryOutboundException</b> and the entire transaction is <b>rolled back</b>.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-004</td>
+      <td class="rule">After a batch is allocated for export, its <b>currentQuantity is immediately decremented</b> and an <b>EXPORT</b> transaction is recorded in the inventory ledger.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-005</td>
+      <td class="rule">Upon successful export note creation, the associated <b>StoreOrder status transitions to IN_TRANSIT</b>.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-006</td>
+      <td class="rule"><b>Manual Export:</b> Allows the coordinator to manually select specific batches. The system validates that the selected batch has sufficient stock; if not, an exception is thrown.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-007</td>
+      <td class="rule"><b>Surplus Export:</b> Can be created without a StoreOrder (<code>storeOrder = null</code>). The export code is prefixed with <b>PX-SUR-</b>. Its initial status is immediately <b>SHIPPED</b> and it is <b>never added to a delivery trip</b>. Logged as <b>SURPLUS_EXPORT</b> in the ledger.</td>
+    </tr>
+
+    <tr class="exp-row">
+      <td class="id exp">BR-EXP-008</td>
+      <td class="rule">An export note can only be <b>cancelled if its status is not SHIPPED</b>. Cancellation sets the status to <b>CANCEL</b> without physically deleting the record.</td>
+    </tr>
+
+    <!-- Section separator -->
+    <tr class="section-gap"><td colspan="3"></td></tr>
+
+    <!-- ========== DELIVERY ========== -->
+    <tr class="del-row">
+      <td class="module" rowspan="7">Delivery Management<br/>(DEL)</td>
+      <td class="id hidden-br">Hidden system logic</td>
+      <td class="rule">Only export notes with <b>storeOrder IS NOT NULL</b> and status <b>READY</b> are eligible to be added to a delivery trip. Surplus exports are strictly blocked.</td>
+    </tr>
+
+    <tr class="del-row">
+      <td class="id del">BR-DEL-001</td>
+      <td class="rule">A delivery trip can only be created by including export notes that are in <b>READY</b> status. After being assigned, each export note transitions to <b>PLANNED</b>.</td>
+    </tr>
+
+    <tr class="del-row">
+      <td class="id del">BR-DEL-002</td>
+      <td class="rule"><b>Surplus Export notes (storeOrder = null) are strictly prohibited</b> from being added to any delivery trip. Attempting to do so throws an <b>IllegalStateException</b>.</td>
+    </tr>
+
+    <tr class="del-row">
+      <td class="id del">BR-DEL-003</td>
+      <td class="rule">A delivery trip can only be <b>started (IN_TRANSIT)</b> if its current status is <b>PLANNED</b>. Upon start, <b>actualStartDate</b> is recorded and all linked export notes transition to <b>SHIPPING</b>.</td>
+    </tr>
+
+    <tr class="del-row">
+      <td class="id del">BR-DEL-004</td>
+      <td class="rule">A delivery trip can only be <b>cancelled</b> if its current status is <b>PLANNED</b> (not yet departed). Cancelling after <b>IN_TRANSIT</b> is forbidden.</td>
+    </tr>
+
+    <tr class="del-row">
+      <td class="id del">BR-DEL-005</td>
+      <td class="rule">When a delivery is cancelled, the system <b>captures a permanent JSON snapshot</b> of all linked export note details (store name, products, batch codes, quantities) before any state change. All export notes are restored to <b>READY</b> and unlinked from the trip.</td>
+    </tr>
+
+    <tr class="del-row">
+      <td class="id del">BR-DEL-006</td>
+      <td class="rule">A delivery trip can only be <b>completed</b> if its status is <b>IN_TRANSIT</b> <b>AND</b> every linked <b>StoreOrder has status DONE</b> (store has confirmed receipt). Otherwise, an exception is thrown. Upon completion, all export notes transition to <b>SHIPPED</b> and <b>actualEndDate</b> is recorded.</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br/>
+<p style="font-size:11px;color:#888;">
+  Generated from source code: <code>ExportNoteService.java</code> &amp; <code>DeliveryService.java</code> &nbsp;|&nbsp;
+  Module: Dev 3 – Outbound &amp; Delivery &nbsp;|&nbsp;
+  Last updated: April 2026
+</p>
+
+</body>
+</html>
