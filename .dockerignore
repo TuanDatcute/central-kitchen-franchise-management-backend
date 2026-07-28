@@ -18,4 +18,11 @@ app-logs-folder/
 
 # 5. Chặn các file chứa mật khẩu bí mật ở máy local của bạn
 .env
+.env.*
+!.env.example
 *.local
+application-local.properties
+src/main/resources/application-local.properties
+
+# 6. Chặn file rác hệ điều hành
+.DS_Store
