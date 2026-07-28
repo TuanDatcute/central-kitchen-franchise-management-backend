@@ -37,7 +37,7 @@ public class SecurityConfig {
 
         private final JwtFilter jwtFilter;
 
-        @Value("${cors_allowed_origin_patterns:http://localhost:3000,http://localhost:5173,https://*.vercel.app,https://*.up.railway.app}")
+        @Value("${cors_allowed_origin_patterns:http://localhost:3000,http://localhost:5173,https://*.vercel.app,https://*.up.railway.app,https://cenfra-ms.tuandat.space}")
         private String corsAllowedOriginPatterns;
 
         @Bean
