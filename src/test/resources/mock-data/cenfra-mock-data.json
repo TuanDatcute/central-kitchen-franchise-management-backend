@@ -1,0 +1,340 @@
+{
+  "metadata": {
+    "name": "CenFra test mock data",
+    "version": "1.0.0",
+    "purpose": "Use this file for controller/service tests or manual API testing when the shared database is unavailable.",
+    "generatedFor": "central-kitchen-franchise-management-backend",
+    "date": "2026-07-28"
+  },
+  "roles": [
+    {
+      "roleId": 1,
+      "roleName": "ADMIN"
+    },
+    {
+      "roleId": 2,
+      "roleName": "MANAGER"
+    },
+    {
+      "roleId": 3,
+      "roleName": "SUPPLY_COORDINATOR"
+    },
+    {
+      "roleId": 4,
+      "roleName": "CENTRAL_KITCHEN_STAFF"
+    },
+    {
+      "roleId": 5,
+      "roleName": "FRANCHISE_STORE_STAFF"
+    }
+  ],
+  "stores": [
+    {
+      "storeId": 1,
+      "storeName": "CenFra District 1",
+      "address": "12 Nguyen Hue, District 1, Ho Chi Minh City",
+      "phone": "0901000001",
+      "status": "ACTIVE"
+    },
+    {
+      "storeId": 2,
+      "storeName": "CenFra District 7",
+      "address": "45 Nguyen Thi Thap, District 7, Ho Chi Minh City",
+      "phone": "0901000002",
+      "status": "ACTIVE"
+    },
+    {
+      "storeId": 3,
+      "storeName": "CenFra Thu Duc",
+      "address": "88 Vo Van Ngan, Thu Duc City, Ho Chi Minh City",
+      "phone": "0901000003",
+      "status": "INACTIVE"
+    }
+  ],
+  "users": [
+    {
+      "userId": 1,
+      "userName": "admin.mock",
+      "password": "$2a$10$mockPasswordHashForLocalTestsOnly",
+      "fullName": "Mock Admin",
+      "email": "admin.mock@cenfra.test",
+      "storeId": null,
+      "roleId": 1,
+      "status": "ACTIVE"
+    },
+    {
+      "userId": 2,
+      "userName": "manager.mock",
+      "password": "$2a$10$mockPasswordHashForLocalTestsOnly",
+      "fullName": "Mock Manager",
+      "email": "manager.mock@cenfra.test",
+      "storeId": null,
+      "roleId": 2,
+      "status": "ACTIVE"
+    },
+    {
+      "userId": 3,
+      "userName": "kitchen.mock",
+      "password": "$2a$10$mockPasswordHashForLocalTestsOnly",
+      "fullName": "Central Kitchen Staff",
+      "email": "kitchen.mock@cenfra.test",
+      "storeId": null,
+      "roleId": 4,
+      "status": "ACTIVE"
+    },
+    {
+      "userId": 4,
+      "userName": "store.d1.mock",
+      "password": "$2a$10$mockPasswordHashForLocalTestsOnly",
+      "fullName": "District 1 Store Staff",
+      "email": "store.d1.mock@cenfra.test",
+      "storeId": 1,
+      "roleId": 5,
+      "status": "ACTIVE"
+    }
+  ],
+  "units": [
+    {
+      "unitId": 1,
+      "unitName": "kg",
+      "description": "Kilogram",
+      "status": "ACTIVE"
+    },
+    {
+      "unitId": 2,
+      "unitName": "pack",
+      "description": "Packaged item",
+      "status": "ACTIVE"
+    },
+    {
+      "unitId": 3,
+      "unitName": "box",
+      "description": "Box",
+      "status": "ACTIVE"
+    }
+  ],
+  "categories": [
+    {
+      "categoryId": 1,
+      "categoryName": "Prepared Food",
+      "status": "ACTIVE"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "Raw Ingredient",
+      "status": "ACTIVE"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "Beverage",
+      "status": "ACTIVE"
+    }
+  ],
+  "products": [
+    {
+      "productId": 1,
+      "productName": "Chicken Rice Meal",
+      "unitId": 2,
+      "categoryId": 1,
+      "imageUrl": "https://example.test/images/chicken-rice-meal.jpg",
+      "description": "Prepared chicken rice meal for franchise stores.",
+      "status": "ACTIVE",
+      "price": 45000.00,
+      "shelfLifeDays": 2,
+      "orderMultiplier": 5
+    },
+    {
+      "productId": 2,
+      "productName": "Beef Pho Broth",
+      "unitId": 1,
+      "categoryId": 1,
+      "imageUrl": "https://example.test/images/beef-pho-broth.jpg",
+      "description": "Central kitchen pho broth.",
+      "status": "ACTIVE",
+      "price": 70000.00,
+      "shelfLifeDays": 3,
+      "orderMultiplier": 10
+    },
+    {
+      "productId": 3,
+      "productName": "Fresh Noodles",
+      "unitId": 1,
+      "categoryId": 2,
+      "imageUrl": "https://example.test/images/fresh-noodles.jpg",
+      "description": "Fresh noodles for daily franchise operations.",
+      "status": "ACTIVE",
+      "price": 30000.00,
+      "shelfLifeDays": 1,
+      "orderMultiplier": 5
+    }
+  ],
+  "manufacturingOrders": [
+    {
+      "manuOrderId": 1,
+      "orderCode": "MO-20260728-001",
+      "startDate": "2026-07-28T01:00:00Z",
+      "endDate": "2026-07-28T05:00:00Z",
+      "status": "COMPLETED",
+      "createdBy": 3,
+      "productId": 1,
+      "quantityPlanned": 100
+    },
+    {
+      "manuOrderId": 2,
+      "orderCode": "MO-20260728-002",
+      "startDate": "2026-07-28T02:00:00Z",
+      "endDate": null,
+      "status": "COOKING",
+      "createdBy": 3,
+      "productId": 2,
+      "quantityPlanned": 80
+    }
+  ],
+  "productBatches": [
+    {
+      "batchId": 1,
+      "batchCode": "BATCH-CR-20260728-001",
+      "productId": 1,
+      "manuOrderId": 1,
+      "initialQuantity": 100,
+      "currentQuantity": 70,
+      "manufacturingDate": "2026-07-28",
+      "expiryDate": "2026-07-30",
+      "status": "AVAILABLE"
+    },
+    {
+      "batchId": 2,
+      "batchCode": "BATCH-PB-20260728-001",
+      "productId": 2,
+      "manuOrderId": 2,
+      "initialQuantity": 80,
+      "currentQuantity": 80,
+      "manufacturingDate": "2026-07-28",
+      "expiryDate": "2026-07-31",
+      "status": "AVAILABLE"
+    }
+  ],
+  "storeOrders": [
+    {
+      "orderId": 1,
+      "orderCode": "SO-20260728-D1-001",
+      "storeId": 1,
+      "orderDate": "2026-07-28T08:30:00",
+      "deliveryDate": "2026-07-29",
+      "receivedAt": null,
+      "status": "PENDING",
+      "orderDetails": [
+        {
+          "detailId": 1,
+          "productId": 1,
+          "quantity": 10,
+          "unitPrice": 45000.00
+        },
+        {
+          "detailId": 2,
+          "productId": 2,
+          "quantity": 20,
+          "unitPrice": 70000.00
+        }
+      ]
+    },
+    {
+      "orderId": 2,
+      "orderCode": "SO-20260728-D7-001",
+      "storeId": 2,
+      "orderDate": "2026-07-28T09:00:00",
+      "deliveryDate": "2026-07-29",
+      "receivedAt": null,
+      "status": "IN_TRANSIT",
+      "orderDetails": [
+        {
+          "detailId": 3,
+          "productId": 1,
+          "quantity": 15,
+          "unitPrice": 45000.00
+        },
+        {
+          "detailId": 4,
+          "productId": 3,
+          "quantity": 10,
+          "unitPrice": 30000.00
+        }
+      ]
+    }
+  ],
+  "deliveries": [
+    {
+      "deliveryId": 1,
+      "deliveryCode": "DEL-20260729-001",
+      "driverName": "Mock Driver",
+      "vehiclePlate": "51C-12345",
+      "scheduledDate": "2026-07-29T08:00:00+07:00",
+      "actualStartDate": "2026-07-29T08:05:00+07:00",
+      "actualEndDate": null,
+      "status": "IN_TRANSIT",
+      "createdBy": 3,
+      "createdAt": "2026-07-28T15:30:00+07:00"
+    }
+  ],
+  "deliveryIssues": [
+    {
+      "issueId": 1,
+      "storeOrderId": 2,
+      "replacementOrderId": null,
+      "status": "PENDING_REVIEW",
+      "reportedOrderStatus": "IN_TRANSIT",
+      "reason": "DAMAGED",
+      "note": "Two packs were damaged during delivery.",
+      "totalQuantity": 25,
+      "affectedQuantity": 2,
+      "issueItemsJson": "[{\"productId\":1,\"quantity\":2,\"note\":\"Damaged package\"}]",
+      "recommendedResolution": "REPLACE_PARTIAL",
+      "reportedBy": 4,
+      "reportedAt": "2026-07-29T10:15:00",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "reviewDecision": null,
+      "selectedResolution": null,
+      "imageUrls": "[\"https://example.test/images/delivery-issue-001.jpg\"]"
+    }
+  ],
+  "apiPayloads": {
+    "login": {
+      "username": "store.d1.mock",
+      "password": "password"
+    },
+    "createStoreOrder": {
+      "deliveryDate": "2026-07-29",
+      "details": [
+        {
+          "productId": 1,
+          "quantity": 10
+        },
+        {
+          "productId": 2,
+          "quantity": 20
+        }
+      ]
+    },
+    "updateStoreOrder": {
+      "deliveryDate": "2026-07-30",
+      "details": [
+        {
+          "productId": 1,
+          "quantity": 15
+        }
+      ]
+    },
+    "rejectDelivery": {
+      "reason": "DAMAGED",
+      "note": "Damaged items found during receiving.",
+      "items": [
+        {
+          "productId": 1,
+          "quantity": 2,
+          "receivedQuantity": 8
+        }
+      ]
+    }
+  }
+}
