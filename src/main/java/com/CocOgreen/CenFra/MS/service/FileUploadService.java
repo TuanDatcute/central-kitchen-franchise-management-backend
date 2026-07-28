@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface FileUploadService {
     /**
-     * Upload một MultipartFile lên dịch vụ đám mây (Cloudinary/S3/...)
+     * Upload một MultipartFile lên dịch vụ lưu trữ đám mây.
      * vào folder mặc định cho product.
      *
      * @param file File ảnh được truyền từ client
