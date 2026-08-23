@@ -4,7 +4,6 @@
 ---
 
 ##  Thông tin đề tài
-- **Mã đề tài:** SP26SWP07  
 - **Tên đề tài:**  
   Hệ thống Quản lý Bếp Trung Tâm và Cửa hàng Franchise  
   (Central Kitchen and Franchise Store Management System)
